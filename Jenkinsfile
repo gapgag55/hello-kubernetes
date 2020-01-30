@@ -1,43 +1,11 @@
 pipeline {
-  environment {
-    registry = "imkopkap/hellokubernetes"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
-  agent {
-     dockerfile {
-        filename 'Dockerfile'
-        label 'docker'
-     }
-  }
+  agent { dockerfile true }
   stages {
-    stage('Build') {
+    stage('Test') {
       steps {
-        echo 'Building..'
-        
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
+        sh 'node --version'
+        sh 'svn --version'
       }
     }
-    // stage('Test') {
-    //   steps {
-    //     echo 'Testing..'
-    //   }
-    // }
-    // stage('Deploy Image') {
-    //   steps{
-    //     script {
-    //       docker.withRegistry( '', registryCredential ) {
-    //         dockerImage.push()
-    //       }
-    //     }
-    //   }
-    // }
-    // stage('Deploy') {
-    //   steps {
-    //     echo 'Deploying....'
-    //   }
-    // }
   }
 }
