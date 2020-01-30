@@ -2,24 +2,31 @@ pipeline {
   environment {
     registry = "imkopkap/hellokubernetes"
     registryCredential = 'dockerhub'
+    dockerImage = ''
   }
-
-  agent {
-    docker { image 'node:7-alpine' }
-  }
+  agent any
   stages {
     stage('Build') {
       steps {
         echo 'Building..'
         
         script {
-          docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
     stage('Test') {
       steps {
         echo 'Testing..'
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
       }
     }
     stage('Deploy') {
