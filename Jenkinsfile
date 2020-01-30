@@ -5,8 +5,10 @@ pipeline {
     dockerImage = ''
   }
   agent {
-    dockerfile true
-    label 'docker'
+     dockerfile {
+        filename 'Dockerfile'
+        label 'docker'
+     }
   }
   stages {
     stage('Build') {
