@@ -15,24 +15,24 @@ pipeline {
         }
       }
     }
-    stage('Test') {
-      steps {
-        echo 'Testing..'
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Deploying....'
-      }
-    }
+    // stage('Test') {
+    //   steps {
+    //     echo 'Testing..'
+    //   }
+    // }
+    // stage('Deploy Image') {
+    //   steps{
+    //     script {
+    //       docker.withRegistry( '', registryCredential ) {
+    //         dockerImage.push()
+    //       }
+    //     }
+    //   }
+    // }
+    // stage('Deploy') {
+    //   steps {
+    //     echo 'Deploying....'
+    //   }
+    // }
   }
 }
