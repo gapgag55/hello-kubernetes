@@ -1,8 +1,9 @@
 pipeline {
+  agent none
   stages {
     stage('Test') {
       steps {
-        echo 'Hello Test'
+        sh 'node --version'
       }
     }
   }
