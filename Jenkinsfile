@@ -2,7 +2,7 @@ pipeline {
   environment {
     dockerImage = ''
   }
-  agent { dockerfile true }
+  agent any
   stages {
     stage('Build Image') {
       steps {
