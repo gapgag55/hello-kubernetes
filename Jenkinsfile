@@ -1,9 +1,21 @@
 pipeline {
-  agent any
+  environment {
+    dockerImage = ''
+  }
+  agent { dockerfile true }
   stages {
-    stage('Test') {
+    stage('Build Image') {
       steps {
-        sh 'docker --v'
+        script {
+          dockerImage = docker.build "imkopkap/hello-kubernetes"
+        }
+      }
+    }
+    stage('Push Image') {
+      steps {
+        script {
+          dockerImage.pushImage()
+        }
       }
     }
   }
