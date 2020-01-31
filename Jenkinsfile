@@ -22,8 +22,8 @@ pipeline {
     }
     stage('Deploy Development') {
       steps {
-        sh 'kubectl apply -f dev-deployment.yml';
-        sh 'kubectl apply -f dev-service.yml';
+        sh 'kubectl apply -f dev-deployment.yml --namespace=development';
+        sh 'kubectl apply -f dev-service.yml --namespace=development'';
       }
     }
   }
