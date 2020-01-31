@@ -14,7 +14,7 @@ pipeline {
     stage('Push Image') {
       steps {
         script {
-          dockerImage.pushImage()
+          dockerImage.push('latest')
         }
       }
     }
