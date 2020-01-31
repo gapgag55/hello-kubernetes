@@ -20,5 +20,11 @@ pipeline {
         }
       }
     }
+    stage('Deploy Development') {
+      steps {
+        sh 'kubectl apply -f dev-deployment.yml';
+        sh 'kubectl apply -f dev-service.yml';
+      }
+    }
   }
 }
